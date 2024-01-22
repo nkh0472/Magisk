@@ -214,16 +214,7 @@ esac
 
 yes | "$sdk" --licenses > /dev/null
 curl -L $lsposed_url -o out/lsposed.zip
-
-if [ -n "$GITHUB_ACTIONS" ]; then
-  # Download the specially built emulator to run on GitHub action runners
-  curl -L $emu_url -o emulator.zip
-  unzip emulator.zip
-  emu='./emulator/emulator'
-else
-  # Directly use the official emulator
-  "$sdk" --channel=3 emulator
-fi
+"$sdk" --channel=3 tools platform-tools emulator
 
 if [ -n "$1" ]; then
   run_test $1
